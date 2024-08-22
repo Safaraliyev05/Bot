@@ -41,15 +41,15 @@ A Telegram bot designed to guide users through a series of lessons, sending remi
    cd Bot
 
 2. Create a virtual environment and activate it
-python -m venv venv
-source venv/bin/activate
+- python -m venv venv
+- source venv/bin/activate
 
 3. Install the required packages
-pip install -r requirements.txt
+- pip install -r requirements.txt
 
 4. Create a .env file in the project root directory and add your environment variables
-TOKEN=your-telegram-bot-token
-ADMIN_CHAT_ID=your-chat-id
+- TOKEN=your-telegram-bot-token
+- ADMIN_CHAT_ID=your-chat-id
 
 
 
