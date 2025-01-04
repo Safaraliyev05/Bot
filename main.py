@@ -43,10 +43,6 @@ def create_lesson_keyboard(url):
     return keyboard
 
 
-first_lesson_keyboard = create_lesson_keyboard('Link for site')
-second_lesson_keyboard = create_lesson_keyboard('Link for site')
-third_lesson_keyboard = create_lesson_keyboard('Link for site')
-fourth_lesson_keyboard = create_lesson_keyboard('Link for site')
 
 fr_reminder_keyboard = InlineKeyboardBuilder()
 fr_reminder_keyboard.row(InlineKeyboardButton(text="Ha ko'rdim, bonus dars bering!", callback_data="second_lesson"))
@@ -54,7 +50,6 @@ fr_reminder_keyboard.row(InlineKeyboardButton(text="Yo'q, hoziroq ko'raman", cal
 
 sr_reminder_keyboard = InlineKeyboardBuilder()
 sr_reminder_keyboard.row(InlineKeyboardButton(text="Ha ko'rdim, bonus dars bering", callback_data="third_lesson"))
-sr_reminder_keyboard.row(InlineKeyboardButton(text="Yo'q, hoziroq ko'raman", callback_data="watch_second_lesson"))
 
 tr_reminder_keyboard = InlineKeyboardBuilder()
 tr_reminder_keyboard.row(InlineKeyboardButton(text="Ha ko'rdim, bonus dars bering!", callback_data="fourth_lesson"))
@@ -62,7 +57,6 @@ tr_reminder_keyboard.row(InlineKeyboardButton(text="Yo'q, hoziroq ko'raman", cal
 
 for_reminder_keyboard = InlineKeyboardBuilder()
 for_reminder_keyboard.row(InlineKeyboardButton(text="Ha, anketani bering", callback_data="google_form"))
-for_reminder_keyboard.row(InlineKeyboardButton(text="Yo'q, hoziroq ko'raman", callback_data="watch_fourth_lesson"))
 
 google_form_k = InlineKeyboardBuilder()
 google_form_k.row(InlineKeyboardButton(text="Anketani to'ldirish", url="https://forms.gle/6HCyDD4QBwqrXWNF8"))
@@ -113,7 +107,6 @@ async def first_lesson(message: Message) -> None:
         return
 
     user_states[user_id] = 'first_lesson'
-    user_actions['first_lesson'].add(user_id)
     first_video = FSInputFile('media/teasers/first_teaser.mp4')
     await bot.send_video(
         chat_id=message.chat.id,
@@ -123,7 +116,6 @@ async def first_lesson(message: Message) -> None:
 
     await bot.send_message(
         chat_id=message.chat.id,
-        text=f"Text message",
         reply_markup=first_lesson_keyboard.as_markup()
     )
 
@@ -140,7 +132,6 @@ async def first_lesson(message: Message) -> None:
         send_message_after_delay(
             chat_id=message.chat.id,
             delay_minutes=10,
-            message="Text message",
             reply_markup=fr_reminder_keyboard.as_markup()
         )
     )
@@ -167,7 +158,6 @@ async def watch_first_lesson(query: CallbackQuery) -> None:
     user_states[user_id] = 'watch_first_lesson'
 
     await query.message.reply(
-        text=f"Text message",
         reply_markup=first_lesson_keyboard.as_markup()
     )
 
@@ -184,7 +174,6 @@ async def watch_first_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"Text message",
             reply_markup=fr_reminder_keyboard.as_markup()
         )
     )
@@ -198,7 +187,6 @@ async def second_lesson(query: CallbackQuery) -> None:
         return
 
     user_states[user_id] = 'second_lesson'
-    user_actions['second_lesson'].add(user_id)
 
     first_video = FSInputFile('media/teasers/second_teaser.mp4')
     await bot.send_video(
@@ -208,7 +196,6 @@ async def second_lesson(query: CallbackQuery) -> None:
 
     await bot.send_message(
         chat_id=query.message.chat.id,
-        text=f"Text message",
         reply_markup=second_lesson_keyboard.as_markup()
     )
 
@@ -225,7 +212,6 @@ async def second_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"Text message",
             reply_markup=sr_reminder_keyboard.as_markup()
         )
     )
@@ -241,7 +227,6 @@ async def watch_second_lesson(query: CallbackQuery) -> None:
     user_states[user_id] = 'watch_second_lesson'
 
     await query.message.reply(
-        text=f"Text message",
         reply_markup=second_lesson_keyboard.as_markup()
     )
 
@@ -249,7 +234,6 @@ async def watch_second_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"Text message",
             reply_markup=sr_reminder_keyboard.as_markup()
         )
     )
@@ -274,7 +258,6 @@ async def third_lesson(query: CallbackQuery) -> None:
 
     await bot.send_message(
         chat_id=query.message.chat.id,
-        text=f"Text message",
         reply_markup=third_lesson_keyboard.as_markup()
     )
 
@@ -291,7 +274,6 @@ async def third_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"Text message",
             reply_markup=tr_reminder_keyboard.as_markup()
         )
     )
@@ -307,7 +289,6 @@ async def watch_third_lesson(query: CallbackQuery) -> None:
     user_states[user_id] = 'watch_third_lesson'
 
     await query.message.reply(
-        text=f"Text message",
         reply_markup=third_lesson_keyboard.as_markup()
     )
 
@@ -315,7 +296,6 @@ async def watch_third_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"Text message",
             reply_markup=tr_reminder_keyboard.as_markup()
         )
     )
@@ -340,7 +320,6 @@ async def fourth_lesson(query: CallbackQuery) -> None:
 
     await bot.send_message(
         chat_id=query.message.chat.id,
-        text=f"Text message",
         reply_markup=fourth_lesson_keyboard.as_markup()
     )
 
@@ -357,7 +336,6 @@ async def fourth_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"Text message",
             reply_markup=for_reminder_keyboard.as_markup()
         )
     )
@@ -373,7 +351,6 @@ async def watch_fourth_lesson(query: CallbackQuery) -> None:
     user_states[user_id] = 'watch_fourth_lesson'
 
     await query.message.reply(
-        text=f"Text message",
         reply_markup=fourth_lesson_keyboard.as_markup()
     )
 
@@ -381,7 +358,6 @@ async def watch_fourth_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"Text message",
             reply_markup=for_reminder_keyboard.as_markup()
         )
     )
