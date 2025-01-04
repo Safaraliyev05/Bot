@@ -27,7 +27,6 @@ user_actions = {
     'fourth_lesson': set()
 }
 
-# Cumulative tracking dictionary
 cumulative_user_actions = {
     'started': set(),
     'first_lesson': set(),
@@ -37,7 +36,6 @@ cumulative_user_actions = {
 }
 
 
-# Keyboards
 def create_lesson_keyboard(url):
     keyboard = InlineKeyboardBuilder()
     keyboard.row(InlineKeyboardButton(text="Darsni ko'rish📹", url=url))
@@ -45,10 +43,10 @@ def create_lesson_keyboard(url):
     return keyboard
 
 
-first_lesson_keyboard = create_lesson_keyboard('http://jahongirprank.uz/1-darslik/')
-second_lesson_keyboard = create_lesson_keyboard('http://jahongirprank.uz/2-darslik/')
-third_lesson_keyboard = create_lesson_keyboard('http://jahongirprank.uz/3-darslik/')
-fourth_lesson_keyboard = create_lesson_keyboard('http://jahongirprank.uz/4-darslik/')
+first_lesson_keyboard = create_lesson_keyboard('Link for site')
+second_lesson_keyboard = create_lesson_keyboard('Link for site')
+third_lesson_keyboard = create_lesson_keyboard('Link for site')
+fourth_lesson_keyboard = create_lesson_keyboard('Link for site')
 
 fr_reminder_keyboard = InlineKeyboardBuilder()
 fr_reminder_keyboard.row(InlineKeyboardButton(text="Ha ko'rdim, bonus dars bering!", callback_data="second_lesson"))
@@ -56,7 +54,7 @@ fr_reminder_keyboard.row(InlineKeyboardButton(text="Yo'q, hoziroq ko'raman", cal
 
 sr_reminder_keyboard = InlineKeyboardBuilder()
 sr_reminder_keyboard.row(InlineKeyboardButton(text="Ha ko'rdim, bonus dars bering", callback_data="third_lesson"))
-sr_reminder_keyboard.row(InlineKeyboardButton(text="Hoziroq ko'raman", callback_data="watch_second_lesson"))
+sr_reminder_keyboard.row(InlineKeyboardButton(text="Yo'q, hoziroq ko'raman", callback_data="watch_second_lesson"))
 
 tr_reminder_keyboard = InlineKeyboardBuilder()
 tr_reminder_keyboard.row(InlineKeyboardButton(text="Ha ko'rdim, bonus dars bering!", callback_data="fourth_lesson"))
@@ -64,7 +62,7 @@ tr_reminder_keyboard.row(InlineKeyboardButton(text="Yo'q, hoziroq ko'raman", cal
 
 for_reminder_keyboard = InlineKeyboardBuilder()
 for_reminder_keyboard.row(InlineKeyboardButton(text="Ha, anketani bering", callback_data="google_form"))
-for_reminder_keyboard.row(InlineKeyboardButton(text="Videoni endi ko'raman", callback_data="watch_fourth_lesson"))
+for_reminder_keyboard.row(InlineKeyboardButton(text="Yo'q, hoziroq ko'raman", callback_data="watch_fourth_lesson"))
 
 google_form_k = InlineKeyboardBuilder()
 google_form_k.row(InlineKeyboardButton(text="Anketani to'ldirish", url="https://forms.gle/6HCyDD4QBwqrXWNF8"))
@@ -115,7 +113,7 @@ async def first_lesson(message: Message) -> None:
         return
 
     user_states[user_id] = 'first_lesson'
-    user_actions['first_lesson'].add(user_id)  # Update action tracking
+    user_actions['first_lesson'].add(user_id)
     first_video = FSInputFile('media/teasers/first_teaser.mp4')
     await bot.send_video(
         chat_id=message.chat.id,
@@ -125,10 +123,7 @@ async def first_lesson(message: Message) -> None:
 
     await bot.send_message(
         chat_id=message.chat.id,
-        text=f"Hey you, what's up {message.from_user.first_name}👋🏻\n\n"
-             f"🕸Man Spiderman - Jahongir Saylavov sun'iy yordamchilari bo'laman😎\n\n"
-             f"Grammatikasiz speaking chiqarishni isbotlab beradigan DARSLIK shu yerda 👇🏻 \n\n"
-             f"📌Eslatib o'taman, darslik 24 soatdan keyin o'chib ketadi🫡\n",
+        text=f"Text message",
         reply_markup=first_lesson_keyboard.as_markup()
     )
 
@@ -145,9 +140,7 @@ async def first_lesson(message: Message) -> None:
         send_message_after_delay(
             chat_id=message.chat.id,
             delay_minutes=10,
-            message="🫢1 soat ichida darslikni ko'rgan obunachilarimga, "
-                    "BONUS sifatida yana bitta darslik sovg'a qilmoqchiman🎁\n\n"
-                    "Shustriy bo'lsez, ulgurib qolasiz✊🏻",
+            message="Text message",
             reply_markup=fr_reminder_keyboard.as_markup()
         )
     )
@@ -174,10 +167,7 @@ async def watch_first_lesson(query: CallbackQuery) -> None:
     user_states[user_id] = 'watch_first_lesson'
 
     await query.message.reply(
-        text=f"Hey, {query.from_user.first_name}\n\n"
-             f"🗣Agar siz haliyam ZO'R SPEAKING uchun GRAMMATIKA YODLASH kerak deb o'ylasez,\n\n"
-             f"bepul darslikdan keyin aniq fikriz o'zgaradi💯\n\n"
-             f"*Videodars 24 soatdan keyin o'chadi, tezroq ko'rishni maslahat beraman 🫡",
+        text=f"Text message",
         reply_markup=first_lesson_keyboard.as_markup()
     )
 
@@ -194,10 +184,7 @@ async def watch_first_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"Sizga YOMON XABAR bor 🫢\n\n"
-                    f"Bilaman, ishlar bilan bo'lib, darsni ko'rishga vaqt topolmagan bo'lishiz mumkin🙍🏻\n\n"
-                    f"🇺🇸Lekin sizda ingliz tilini OSON va QIZIQARLI o'rganishingiz uchun\n\n"
-                    f"📌Keyin, $*000 pul to'lasangiz ham bu darsni ololmaysiz!",
+            message=f"Text message",
             reply_markup=fr_reminder_keyboard.as_markup()
         )
     )
@@ -211,7 +198,7 @@ async def second_lesson(query: CallbackQuery) -> None:
         return
 
     user_states[user_id] = 'second_lesson'
-    user_actions['second_lesson'].add(user_id)  # Update action tracking
+    user_actions['second_lesson'].add(user_id)
 
     first_video = FSInputFile('media/teasers/second_teaser.mp4')
     await bot.send_video(
@@ -221,13 +208,7 @@ async def second_lesson(query: CallbackQuery) -> None:
 
     await bot.send_message(
         chat_id=query.message.chat.id,
-        text=f"Eee malades, {query.from_user.first_name}\n\n"
-             f"Endi sizda 2-darsni ko'rish imkoniyati bor 🎁\n\n"
-             f"Bu darslikda : \n\n"
-             f"❗️Speaking chiqarolmaslik sabablari va yechimlari\n"
-             f"❗️Bir xil qolipdagi texnikalardan qutulib, QIZIQARLI yo'lda speaking o'rganish\n"
-             f"❗️Qanday qilib man bir o'zim o'rganib, amerikanlardek speaking chiqarganim haqida o'rganasiz🫡\n"
-             f"🗣Sizda darslikni ko'rish uchun 24 soat vaqt bor. Shuning uchun, tezroq ko'ring✊🏻",
+        text=f"Text message",
         reply_markup=second_lesson_keyboard.as_markup()
     )
 
@@ -244,10 +225,7 @@ async def second_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"Hey, {query.from_user.first_name}!\n\n"
-                    f"Bonus darslik sizga yoqtimi ?\n\n"
-                    f"🗣Ayniqsa, grammatikasiz speaking chiqarish degan joyiga  mazza qigandursizaa 😅 \n\n"
-                    f"Agar darsni oxirgacha ko'rgan bo'lsez, sizga yana bitta dars mandan 🎁\n\n",
+            message=f"Text message",
             reply_markup=sr_reminder_keyboard.as_markup()
         )
     )
@@ -263,10 +241,7 @@ async def watch_second_lesson(query: CallbackQuery) -> None:
     user_states[user_id] = 'watch_second_lesson'
 
     await query.message.reply(
-        text=f"🫣{query.from_user.first_name}, Ingliz tilida grammatika yodlashdan charchagan bo'lsez kerak a... \n\n"
-             f"Qiziqarli va oson metodikada SPEAKING chiqarishga qanaqa qarisiz 🤔\n\n"
-             f"🎁Bu haqida BONUS DARSLIKda tushuntirdim. \n\n"
-             f"🤫Hoziroq ko'rsangiz, yana bitta darsga dostup olasiz❗️",
+        text=f"Text message",
         reply_markup=second_lesson_keyboard.as_markup()
     )
 
@@ -274,14 +249,7 @@ async def watch_second_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"Keling, biroz hisob-kitob qilamiz.. \n\n"
-                    f"🗣Odatiy yo'l bilan ingliz tili o'rgansangiz, "
-                    f"12 oydan 24  oygacha bo'lgan vaqtda yaxshi gapirasiz.\n\n"
-                    f"🔝Mani metodikam bilan ingliz tili o'rgansangiz, "
-                    f"3 oydan 6 oygacha bo'lgan vaqtda bemalol ravon gapirolasiz!\n\n"
-                    f"🤯QANDAY QILIB ? - deyabsizmi ?\n\n"
-                    f"Bu haqida bepul darslikda tushuntirib berdim🎁\n\n"
-                    f"Hoziroq darsni ko'rish uchun, pastdagi tugmani bosing👇🏻",
+            message=f"Text message",
             reply_markup=sr_reminder_keyboard.as_markup()
         )
     )
@@ -306,12 +274,7 @@ async def third_lesson(query: CallbackQuery) -> None:
 
     await bot.send_message(
         chat_id=query.message.chat.id,
-        text=f"3-darsni ko'rishga ulgurdiiz 🎉\n\n"
-             f"Bu darslikda : \n\n"
-             f"❗️Speakingni ERKIN chiqarishning maxfiy formulalari va yechimlari\n"
-             f"❗️Qisqa vaqt ichida so'z boyligini oshirish usullari\n"
-             f"❗️Speakingda xatolarni kamaytirish texnikalari va HACKLAR bilan bo'lishaman\n"
-             f"🗣Sizda darslikni ko'rish uchun 24 soat vaqt bor. Shuning uchun, tezroq ko'ring✊🏻",
+        text=f"Text message",
         reply_markup=third_lesson_keyboard.as_markup()
     )
 
@@ -328,11 +291,7 @@ async def third_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"Hey, {query.from_user.first_name}!\n\n"
-                    f"Bonus darslik sizga yoqtimi ?\n\n"
-                    f"🗣Ayniqsa, grammatikasiz speaking chiqarish degan joyiga mazza qigandursiz...\n\n"
-                    f"🎯Hoziroq 4-darsni ko'rish uchun bonus imkoniyatga ega bo'lishingiz mumkin\n\n"
-                    f"❓Siz 3-darsni ko'rdingizmi?",
+            message=f"Text message",
             reply_markup=tr_reminder_keyboard.as_markup()
         )
     )
@@ -348,9 +307,7 @@ async def watch_third_lesson(query: CallbackQuery) -> None:
     user_states[user_id] = 'watch_third_lesson'
 
     await query.message.reply(
-        text=f"🗣Ingliz tilida SPEAKING qilish sizda muommo bo'lmaydi❗️\n\n"
-             f"Agar siz bu darsni ko'rib, berilgan KUN TARTIBIGA amal qilsangiz🔥\n\n"
-             f"Darsni ko'rish uchun pastdagi tugmani bosing👇🏻",
+        text=f"Text message",
         reply_markup=third_lesson_keyboard.as_markup()
     )
 
@@ -358,11 +315,7 @@ async def watch_third_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"Agar siz haliyam ingliz tili o'rganish uchun 2-4 soat vaqt ajratsangiz, "
-                    f"demak juda qiyin usuldan foydalanyapsiz❗️\n\n"
-                    f"🗣Keling, man sizga ham OSON, ham QIZIQARLI metodika o'rgataman🎁\n\n"
-                    f"Keyin siz ingliz tili muhitini yaratib, 3 oyda ravon gapira olasiz✅\n\n"
-                    f"Darslikda hammasini tushuntirib berdim👇🏻",
+            message=f"Text message",
             reply_markup=tr_reminder_keyboard.as_markup()
         )
     )
@@ -387,12 +340,7 @@ async def fourth_lesson(query: CallbackQuery) -> None:
 
     await bot.send_message(
         chat_id=query.message.chat.id,
-        text=f"4-darsni ko'rishga ulgurdiiz 🎉\n\n"
-             f"Bu darslikda : \n\n"
-             f"❗️Speakingda shubha va qo'rquvlarni yengish texnikalari\n"
-             f"❗️O'zbek tilidan ingliz tiliga oson o'tish metodlari\n"
-             f"❗️Mashhur video darsliklardan foydalanib, mazza qilib o'rganish usullari\n"
-             f"🗣Sizda darslikni ko'rish uchun 24 soat vaqt bor. Shuning uchun, tezroq ko'ring✊🏻",
+        text=f"Text message",
         reply_markup=fourth_lesson_keyboard.as_markup()
     )
 
@@ -409,11 +357,7 @@ async def fourth_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"Hey, {query.from_user.first_name}!\n\n"
-                    f"Bonus darslik sizga yoqtimi ?\n\n"
-                    f"🗣Ayniqsa, grammatikasiz speaking chiqarish degan joyiga mazza qigandursiz...\n\n"
-                    f"🎯Anketani to'ldiring va yana bir BONUS darslik sovg'a qiling\n\n"
-                    f"❓Siz 4-darsni ko'rdingizmi?",
+            message=f"Text message",
             reply_markup=for_reminder_keyboard.as_markup()
         )
     )
@@ -429,14 +373,7 @@ async def watch_fourth_lesson(query: CallbackQuery) -> None:
     user_states[user_id] = 'watch_fourth_lesson'
 
     await query.message.reply(
-        text=f"Bilasizmi, {query.from_user.first_name}\n\n"
-             f"📌Bu video hammasidan ham muhim, chunki bu videodan keyin siz\n\n"
-             f"Hayotingizda katta qaror qabul qilasiz❗️\n\n"
-             f"- Yoki ingliz tili o'rganishni boshlaysiz va rivojlanasiz\n"
-             f"- Yoki videoni ko'rmay, bir xil holatda qolib ketasiz!\n\n"
-             f"Eng yomoni ingliz tilini samarasiz metodikalarda o'rganishni davom etib, "
-             f"yillab vaqtingizu millionlab pullarizni bekorga sarf qivorasiz...\n\n"
-             f"Tanlov o'zizda, shustri bo'ling 😉",
+        text=f"Text message",
         reply_markup=fourth_lesson_keyboard.as_markup()
     )
 
@@ -444,13 +381,7 @@ async def watch_fourth_lesson(query: CallbackQuery) -> None:
         send_message_after_delay(
             chat_id=query.message.chat.id,
             delay_minutes=10,
-            message=f"'JUST SPEAK' kursim nega qo'rqmasdan O'zbekistonda yagona deyman ? \n\n"
-                    f"1. Mani shaxsiy grammatikasiz speaking chiqarish metodikam boshqa ustozlarda yo'q ! \n\n"
-                    f"2. Ingliz tili darajezdan qat'iy nazar, "
-                    f"bu kurs sizga to'g'ri keladi. Chunki kursda hayotiy speaking ustida ishlaymiz.\n\n"
-                    f"3. Faqat mani kursimda Kino ko'rib, musiqa eshitib ingliz tilida gaplashishni o'rganasiz."
-                    f"Agar siz ham JUST SPEAK oilamizga qo'shilib, ingliz tilida ravon gaplashishni xohlasangiz,"
-                    f"pastdagi ANKETAni to'ldiring👇🏻",
+            message=f"Text message",
             reply_markup=for_reminder_keyboard.as_markup()
         )
     )
@@ -474,21 +405,17 @@ async def get_report(message: Message):
     await message.answer(report_text)
 
 
-# Command to send user info as an Excel file
 @dp.message(Command('users'))
 async def send_user_info(message: Message) -> None:
-    # Create a DataFrame from the user info dictionary
     data = {
         "Name": [info['name'] for info in user_info.values()],
         "Phone Number": [info['phone_number'] for info in user_info.values()]
     }
     df = pd.DataFrame(data)
 
-    # Save the DataFrame to an Excel file
     file_path = "media/users.xlsx"
     df.to_excel(file_path, index=False)
 
-    # Send the Excel file to the user
     await bot.send_document(chat_id=message.chat.id, document=FSInputFile(file_path))
 
 
@@ -502,5 +429,3 @@ async def main():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     asyncio.run(main())
-
-# hello
