@@ -120,7 +120,8 @@ async def first_lesson(message: Message) -> None:
 
     await bot.send_message(
         chat_id=message.chat.id,
-        reply_markup=first_lesson_keyboard.as_markup()
+        reply_markup=first_lesson_keyboard.as_markup(),
+        text='Text message'
     )
 
     video_note_file = FSInputFile('circle_videos/teaser_one.mp4')
@@ -162,7 +163,9 @@ async def watch_first_lesson(query: CallbackQuery) -> None:
     user_states[user_id] = 'watch_first_lesson'
 
     await query.message.reply(
-        reply_markup=first_lesson_keyboard.as_markup()
+        reply_markup=first_lesson_keyboard.as_markup(),
+        text='Text message'
+
     )
 
     audio = FSInputFile('audio_2024-07-24_05-23-07.ogg')
@@ -200,7 +203,8 @@ async def second_lesson(query: CallbackQuery) -> None:
 
     await bot.send_message(
         chat_id=query.message.chat.id,
-        reply_markup=second_lesson_keyboard.as_markup()
+        reply_markup=second_lesson_keyboard.as_markup(),
+        text='Text message'
     )
 
     video_note_file = FSInputFile('circle_videos/teaser_two.mp4')
@@ -231,7 +235,8 @@ async def watch_second_lesson(query: CallbackQuery) -> None:
     user_states[user_id] = 'watch_second_lesson'
 
     await query.message.reply(
-        reply_markup=second_lesson_keyboard.as_markup()
+        reply_markup=second_lesson_keyboard.as_markup(),
+        text='Text message'
     )
 
     await asyncio.create_task(
@@ -262,7 +267,8 @@ async def third_lesson(query: CallbackQuery) -> None:
 
     await bot.send_message(
         chat_id=query.message.chat.id,
-        reply_markup=third_lesson_keyboard.as_markup()
+        reply_markup=third_lesson_keyboard.as_markup(),
+        text='Text message'
     )
 
     video_note_file = FSInputFile('circle_videos/teaser_three.mp4')
@@ -293,7 +299,8 @@ async def watch_third_lesson(query: CallbackQuery) -> None:
     user_states[user_id] = 'watch_third_lesson'
 
     await query.message.reply(
-        reply_markup=third_lesson_keyboard.as_markup()
+        reply_markup=third_lesson_keyboard.as_markup(),
+        text='Text message'
     )
 
     await asyncio.create_task(
@@ -324,7 +331,8 @@ async def fourth_lesson(query: CallbackQuery) -> None:
 
     await bot.send_message(
         chat_id=query.message.chat.id,
-        reply_markup=fourth_lesson_keyboard.as_markup()
+        reply_markup=fourth_lesson_keyboard.as_markup(),
+        text='Text message'
     )
 
     video_note_file = FSInputFile('circle_videos/teaser_four.mp4')
@@ -355,7 +363,8 @@ async def watch_fourth_lesson(query: CallbackQuery) -> None:
     user_states[user_id] = 'watch_fourth_lesson'
 
     await query.message.reply(
-        reply_markup=fourth_lesson_keyboard.as_markup()
+        reply_markup=fourth_lesson_keyboard.as_markup(),
+        text='Text message'
     )
 
     await asyncio.create_task(
