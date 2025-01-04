@@ -43,6 +43,10 @@ def create_lesson_keyboard(url):
     return keyboard
 
 
+first_lesson_keyboard = create_lesson_keyboard('http://jahongirprank.uz/1-darslik/')
+second_lesson_keyboard = create_lesson_keyboard('http://jahongirprank.uz/2-darslik/')
+third_lesson_keyboard = create_lesson_keyboard('http://jahongirprank.uz/3-darslik/')
+fourth_lesson_keyboard = create_lesson_keyboard('http://jahongirprank.uz/4-darslik/')
 
 fr_reminder_keyboard = InlineKeyboardBuilder()
 fr_reminder_keyboard.row(InlineKeyboardButton(text="Ha ko'rdim, bonus dars bering!", callback_data="second_lesson"))
