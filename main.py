@@ -38,15 +38,15 @@ cumulative_user_actions = {
 
 def create_lesson_keyboard(url):
     keyboard = InlineKeyboardBuilder()
-    keyboard.row(InlineKeyboardButton(text="Darsni ko'rish📹", url=url))
+    keyboard.row(InlineKeyboardButton(text="Watch lesson", url=url))
     keyboard.adjust(1)
     return keyboard
 
 
-first_lesson_keyboard = create_lesson_keyboard('http://jahongirprank.uz/1-darslik/')
-second_lesson_keyboard = create_lesson_keyboard('http://jahongirprank.uz/2-darslik/')
-third_lesson_keyboard = create_lesson_keyboard('http://jahongirprank.uz/3-darslik/')
-fourth_lesson_keyboard = create_lesson_keyboard('http://jahongirprank.uz/4-darslik/')
+first_lesson_keyboard = create_lesson_keyboard('Link for site')
+second_lesson_keyboard = create_lesson_keyboard('Link for site')
+third_lesson_keyboard = create_lesson_keyboard('Link for site')
+fourth_lesson_keyboard = create_lesson_keyboard('Link for site')
 
 fr_reminder_keyboard = InlineKeyboardBuilder()
 fr_reminder_keyboard.row(InlineKeyboardButton(text="Ha ko'rdim, bonus dars bering!", callback_data="second_lesson"))
@@ -54,6 +54,7 @@ fr_reminder_keyboard.row(InlineKeyboardButton(text="Yo'q, hoziroq ko'raman", cal
 
 sr_reminder_keyboard = InlineKeyboardBuilder()
 sr_reminder_keyboard.row(InlineKeyboardButton(text="Ha ko'rdim, bonus dars bering", callback_data="third_lesson"))
+sr_reminder_keyboard.row(InlineKeyboardButton(text="Yo'q, hoziroq ko'raman", callback_data="watch_second_lesson"))
 
 tr_reminder_keyboard = InlineKeyboardBuilder()
 tr_reminder_keyboard.row(InlineKeyboardButton(text="Ha ko'rdim, bonus dars bering!", callback_data="fourth_lesson"))
@@ -67,9 +68,8 @@ google_form_k.row(InlineKeyboardButton(text="Anketani to'ldirish", url="https://
 google_form_k.adjust(1)
 
 admin_kb = InlineKeyboardBuilder()
-admin_kb.row(InlineKeyboardButton(text='Admin', url='@JahongirPrankAdmin'))
+admin_kb.row(InlineKeyboardButton(text='Admin', url='@Admin'))
 
-# Collect user info keyboard
 user_info_keyboard = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text="Send Contact", request_contact=True)]
